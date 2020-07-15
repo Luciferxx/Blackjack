@@ -6,15 +6,15 @@ Kindly go to the docker website and follow installation procedures
 ## Get the docker image of Tensorflow Serving from Docker Hub
 
 Open your terminal or command prompt in which docker is installed
-"docker pull tensorflow/serving"
+`docker pull tensorflow/serving`
 
 ## Save your model to be deployed
  
 Save your tensorflow serving model as .pb extension and with other dependencies from using
 
-model.save_model("saved_model") function in keras
+`model.save_model("saved_model")` function in keras
 
-You can also use : tensorflow.keras.experimental.export_saved_model(model,"saved_model/1/")
+You can also use : `tensorflow.keras.experimental.export_saved_model(model,"saved_model/1/")`
 model is your variable for the Keras model and saved_model is the name for the file as which it will be saved as. 
 1 is for the version 
 # You can Section 2 for remote deployement on cloud(for free :D)
@@ -27,26 +27,26 @@ Open the terminal again.
 
 Copy the directory path to the respective saved model file 
 
-"docker run -it --rm -p 8500:8500 -p 8501:8501 -v "Copied_path_to_the_saved_model:/models/saved_model/" -e MODEL_NAME=saved_model tensorflow/serving"
+`docker run -it --rm -p 8500:8500 -p 8501:8501 -v "Copied_path_to_the_saved_model:/models/saved_model/" -e MODEL_NAME=saved_model tensorflow/serving`
 docker run command is to run the container
-"-it" is used in order to allocate a tty for the container process.
-"--rm" 
-"-p" is used to define the port number 
-"8500" is used to query using gRPC 
-"8501" is used to query using REST API
-"-v" Volume mount
+`-it`is used in order to allocate a tty for the container process.
+`-rm` deletes the container once it has been stopped although doesn't removes the image
+`-p`is used to define the port number 
+`8500` is used to query using gRPC 
+`8501` is used to query using REST API
+`-v` Volume mount
 Copied_path_to_the_saved_model Eg: /mnt/d/saved_model 
-"/models/saved_model" means that there is a folder in the container from which Tensorflow serving loads the model for deployment. 
+`/models/saved_model` means that there is a folder in the container from which Tensorflow serving loads the model for deployment. 
 This models folder exist inside that container
 Note: saved_model is the name of your saved_model which needs to be same as the one you have saved with.
 In this case  it was saved_model
-"-e" environment variable
-MODEL_NAME as the name suggests it should be the same as the name you have defined
-"tensorflow/serving" is the mandatory to right because by this you are declaring of what image you want to create container of.
+`-e` environment variable
+`MODEL_NAME` as the name suggests it should be the same as the name you have defined
+`tensorflow/serving` is the mandatory to right because by this you are declaring of what image you want to create container of.
 
 In case, if you want to provide a name to your container. It can be done by using the --name tag
 
-For eg: 'docker run --name "Model_Container"' #Rest of the command-->
+For eg: `docker run --name "Model_Container" #Rest of the command--> `
 
 ## How do we query the docker deployment
 
@@ -82,21 +82,21 @@ Keep this dockerfile with models folder
 Open your Dockerfile using terminal or Notepad
 Note: This dockerfile doesn't has any  extension
 
-Change the "MODEL_NAME"  variable and change the name of your model below as well.
-"COPY models/chat_model models/chat_model" 
+Change the `MODEL_NAME`  variable and change the name of your model below as well.
+`COPY models/chat_model models/chat_model` 
 
 This command will help you to store your model into the tensorflow serving container
 
 Now , lets go inside the folder where we have the docker file using the terminal
 Note: folder_name is the name of the folder which consists your docker file and the model files
 
-Run the following command: "docker build -t <folder_name> ."
+Run the following command: `docker build -t <folder_name> . `
 
 Note: the period at the end of the command
 This command will compile your dockerfile and makes sure everything will run fine.
 
-Last But not the least: Run the following command: "docker run -p 8501:8501 -e PORT=8501 -t <folder_name>"
-"-t" stands for the tag or the name of the container 
+Last But not the least: Run the following command: `docker run -p 8501:8501 -e PORT=8501 -t <folder_name>`
+`-t` stands for the tag or the name of the container 
 
 This commands sets up your local server on your laptop to run your tensorflow model.
 
@@ -111,26 +111,26 @@ Install Heroku CLI
 open your respective terminal where you installed the Heroku CLI
 
 Lets check heroku version if everything is perfectly installed:
-Command: "Heroku version"
+Command: `Heroku version`
 
 Next login to the Heroku CLI:
-"heroku container: login"
+`heroku container: login`
 This command will redirect you to your default browser where you have to login.
 
 Next, Lets create an app on Heroku using the following command:
 
-"Heroku create <the name of the container which is available on the heroku service>" eg . Chatbot
+`Heroku create <the name of the container which is available on the heroku service>` eg . Chatbot
 
-"Heroku container:push web -a <folder_name>"
+`Heroku container:push web -a <folder_name>`
 Run this command where you have stored the docker file
 
 If everything is fine, your container will be created successfully
 
 ## Release it on the web server 
 How?
-"Heroku container:release web -a <folder_name>"
+`Heroku container:release web -a <folder_name>`
 
 Alll right all set 
 
 Next, wondering??
-"http://<name_of_the_container>.herokuapp.com/v1/models/<name_of_model>:predict"
+`http://<name_of_the_container>.herokuapp.com/v1/models/<name_of_model>:predict`
