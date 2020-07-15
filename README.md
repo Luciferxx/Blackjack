@@ -113,7 +113,7 @@ y_prob = np.array(response["predictions"])
 - open your respective terminal where you installed the Heroku CLI
 
 - Lets check heroku version if everything is perfectly installed:
-- Command: `Heroku version`
+- Command: `heroku version`
 
 - Next login to the Heroku CLI:
 `heroku container: login`
