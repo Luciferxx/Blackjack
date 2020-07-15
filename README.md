@@ -28,7 +28,7 @@
 - Copy the directory path to the respective saved model file 
 
 `docker run -it --rm -p 8500:8500 -p 8501:8501 -v "Copied_path_to_the_saved_model:/models/saved_model/" -e MODEL_NAME=saved_model tensorflow/serving`
-- docker run command is to run the container
+- `docker run` command is to run the container
 - `-it`is used in order to allocate a tty for the container process.
 - `-rm` deletes the container once it has been stopped although doesn't removes the image
 - `-p`is used to define the port number 
@@ -51,8 +51,8 @@
 ## How do we query the docker deployment
 
 # REST API query
-X_Test is your test data on which you want to conduct tests on
-import json
+- X_Test is your test data on which you want to conduct tests on
+`import json
 a = np.array(X_test) 
 input_data_json = json.dumps({
     "signature_name":"serving_default",
@@ -65,9 +65,9 @@ Note: Again replace your saved model name with saved_model. Rest all remains som
 response = requests.post(SERVER_URL,data=input_data_json)
 response.raise_for_status()
 response = response.json()
-y_prob = np.array(response["predictions"])
+y_prob = np.array(response["predictions"])`
 
-Well this is one of the way to approach creating the local host server on docker
+- Well this is one of the way to approach creating the local host server on docker
 
 # SECTION 2
 
