@@ -52,7 +52,8 @@
 
 # REST API query
 - X_Test is your test data on which you want to conduct tests on
-`import json
+```
+import json
 a = np.array(X_test) 
 input_data_json = json.dumps({
     "signature_name":"serving_default",
@@ -65,7 +66,8 @@ Note: Again replace your saved model name with saved_model. Rest all remains som
 response = requests.post(SERVER_URL,data=input_data_json)
 response.raise_for_status()
 response = response.json()
-y_prob = np.array(response["predictions"])`
+y_prob = np.array(response["predictions"])
+```
 
 - Well this is one of the way to approach creating the local host server on docker
 
