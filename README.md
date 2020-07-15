@@ -1,14 +1,14 @@
-#Docker Tutorial for Local Deployment of Tensorflow Model
+# Docker Tutorial for Local Deployment of Tensorflow Model
 
-##Install Docker 
+## Install Docker 
 Kindly go to the docker website and follow installation procedures
-#SECTION 1
-##Get the docker image of Tensorflow Serving from Docker Hub
+# SECTION 1
+## Get the docker image of Tensorflow Serving from Docker Hub
 
 Open your terminal or command prompt in which docker is installed
 "docker pull tensorflow/serving"
 
-##Save your model to be deployed
+## Save your model to be deployed
  
 Save your tensorflow serving model as .pb extension and with other dependencies from using
 
@@ -19,7 +19,7 @@ model is your variable for the Keras model and saved_model is the name for the f
 1 is for the version 
 # You can Section 2 for remote deployement on cloud(for free :D)
 
-##Time to deployment
+## Time to deployment
 
 Note: Whatever is the current version for your saved_model Tensorflow serving will detect that and deploy
 
@@ -48,9 +48,9 @@ In case, if you want to provide a name to your container. It can be done by usin
 
 For eg: 'docker run --name "Model_Container"' #Rest of the command-->
 
-##How do we query the docker deployment
+## How do we query the docker deployment
 
-#REST API query
+# REST API query
 X_Test is your test data on which you want to conduct tests on
 import json
 a = np.array(X_test) 
@@ -69,7 +69,7 @@ y_prob = np.array(response["predictions"])
 
 Well this is one of the way to approach creating the local host server on docker
 
-#SECTION 2
+# SECTION 2
 
 From following the steps below, you can deploy on local host as well as remote cloud server
 Other is using the dockerfile for deployment 
@@ -100,9 +100,9 @@ Last But not the least: Run the following command: "docker run -p 8501:8501 -e P
 
 This commands sets up your local server on your laptop to run your tensorflow model.
 
-##Refer to the REST API query section in the section 1.
+## Refer to the REST API query section in the section 1.
 
-##HEROKU DEPLOYEMENT:-
+## HEROKU DEPLOYEMENT:-
 
 First, create an account on Heroku. If you already have one, skip to the next step.
 
@@ -126,7 +126,7 @@ Run this command where you have stored the docker file
 
 If everything is fine, your container will be created successfully
 
-##Release it on the web server 
+## Release it on the web server 
 How?
 "Heroku container:release web -a <folder_name>"
 
